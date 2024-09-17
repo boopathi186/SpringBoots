@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 public class MyApi {
 @Autowired
      private ApiService apiService;
-     private  SampleDb sampleDb;
+@Autowired
+    private  Student_Service s;
 	@RequestMapping("/myApi")
 	public List<ApiData> demoApi() {
 		return  apiService.demoApi();
@@ -36,6 +37,14 @@ public class MyApi {
 	apiService.deleteData(id);
 	}
 
+	@RequestMapping("/myStudent")
+	public List<Student> stu() {
+		return  s.stu();
+	}
 
+	@PostMapping("/myStudent")
+	public Student createEmployee(@RequestBody Student sampleDb) {
+		return s.save(sampleDb);
+	}
 }
 	
