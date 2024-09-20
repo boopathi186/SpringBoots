@@ -20,13 +20,15 @@ public class AttendanceService {
     private final LeaveController leaveController;
     private final UserService userService;
 
+
     @Autowired
-    public AttendanceService(AttendanceRepository attendanceRepository, LeaveRepository leaveRepository, LeaveInfo leaveInfo, LeaveController leaveController, UserService userService) {
+    public AttendanceService(AttendanceRepository attendanceRepository, LeaveRepository leaveRepository, LeaveInfo leaveInfo, LeaveController leaveController, UserService userService, AttendanceInfo attendanceInfo) {
         this.attendanceRepository = attendanceRepository;
         this.leaveRepository = leaveRepository;
         this.leaveInfo = leaveInfo;
         this.leaveController = leaveController;
         this.userService = userService;
+
     }
 
     public List<AttendanceInfo> getAttendanceRecord() {
@@ -38,7 +40,7 @@ public class AttendanceService {
             if(attendanceInfo.getStatus().equals("absent"))
             {
                 leaveInfo.setLeave_date(attendanceInfo.getDate());
-                UserDetails userDetails = userService.getUserById(attendanceInfo.getUser_id());
+                UserDetails userDetails = userService.getUserById(attendanceInfo.getUser().getUser_id());
                 leaveInfo.setUser(userDetails);
                 leaveController.addLeaveForm(leaveInfo);
             }

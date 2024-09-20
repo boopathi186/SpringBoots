@@ -15,8 +15,9 @@ public class AttendanceInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int attendance_id;
-    @JoinColumn
-    private int user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName ="user_id")
+    private UserDetails user;
     private String date;
     private String RecordIn;
     private String RecordOut;
@@ -26,7 +27,7 @@ public class AttendanceInfo {
     public String toString() {
         return "Attendance_info{" +
                 "attendance_id=" + attendance_id +
-                ", user_id=" + user_id +
+                ", user_id=" + user +
                 ", date='" + date + '\'' +
                 ", RecordIn='" + RecordIn + '\'' +
                 ", RecordOut='" + RecordOut + '\'' +
