@@ -3,7 +3,10 @@ package com.example.demo1.myApi;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+@Component
 @Service
 public class ApiService {
 
