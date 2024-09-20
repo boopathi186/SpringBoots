@@ -1,6 +1,6 @@
-package com.attendance.attendance_management.Repository;
+package com.attendance.attendance_management.repository;
 
-import com.attendance.attendance_management.Table.LeaveInfo;
+import com.attendance.attendance_management.table.LeaveInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

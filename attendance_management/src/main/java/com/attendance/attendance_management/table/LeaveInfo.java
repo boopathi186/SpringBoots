@@ -1,4 +1,4 @@
-package com.attendance.attendance_management.Table;
+package com.attendance.attendance_management.table;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,10 +14,11 @@ public class LeaveInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int leave_id;
+    private Long leave_id;
     @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName ="user_id" )
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserDetails user;
-    private String leave_date;
+    @Column(name = "leave_date")
+    private String leaveDate;
 
 }
