@@ -1,11 +1,12 @@
-package com.attendance.attendance_management.Services;
+package com.attendance.attendance_management.services;
 
-import com.attendance.attendance_management.Controller.LeaveController;
-import com.attendance.attendance_management.Repository.AttendanceRepository;
-import com.attendance.attendance_management.Repository.LeaveRepository;
-import com.attendance.attendance_management.Table.AttendanceInfo;
-import com.attendance.attendance_management.Table.LeaveInfo;
-import com.attendance.attendance_management.Table.UserDetails;
+import com.attendance.attendance_management.controller.LeaveController;
+import com.attendance.attendance_management.repository.AttendanceRepository;
+import com.attendance.attendance_management.repository.LeaveRepository;
+import com.attendance.attendance_management.services.UserService;
+import com.attendance.attendance_management.table.AttendanceInfo;
+import com.attendance.attendance_management.table.LeaveInfo;
+import com.attendance.attendance_management.table.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class AttendanceService {
             attendanceRepository.save(attendanceInfo);
             if(attendanceInfo.getStatus().equals("absent"))
             {
-                leaveInfo.setLeave_date(attendanceInfo.getDate());
+                leaveInfo.setLeaveDate(attendanceInfo.getDate());
                 UserDetails userDetails = userService.getUserById(attendanceInfo.getUser().getUser_id());
                 leaveInfo.setUser(userDetails);
                 leaveController.addLeaveForm(leaveInfo);

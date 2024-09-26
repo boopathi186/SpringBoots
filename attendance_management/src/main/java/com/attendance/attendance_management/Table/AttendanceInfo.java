@@ -1,5 +1,6 @@
-package com.attendance.attendance_management.Table;
+package com.attendance.attendance_management.table;
 
+import com.attendance.attendance_management.table.UserDetails;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ public class AttendanceInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int attendance_id;
+    private Long attendance_id;
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName ="user_id")
     private UserDetails user;
