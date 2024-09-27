@@ -24,15 +24,4 @@ public class AttendanceInfo {
     private String RecordOut;
     private String Status;
 
-    @Override
-    public String toString() {
-        return "Attendance_info{" +
-                "attendance_id=" + attendance_id +
-                ", user_id=" + user +
-                ", date='" + date + '\'' +
-                ", RecordIn='" + RecordIn + '\'' +
-                ", RecordOut='" + RecordOut + '\'' +
-                ", Status='" + Status + '\'' +
-                '}';
-    }
 }

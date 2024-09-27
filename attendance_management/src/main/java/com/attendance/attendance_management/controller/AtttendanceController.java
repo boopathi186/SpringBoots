@@ -1,5 +1,6 @@
 package com.attendance.attendance_management.controller;
 
+import com.attendance.attendance_management.dto.AttendanceDto;
 import com.attendance.attendance_management.services.AttendanceService;
 import com.attendance.attendance_management.table.AttendanceInfo;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +16,14 @@ class AttendanceController {
     private final AttendanceService attendanceService;
 
     @GetMapping
-    public List<AttendanceInfo> getAttendanceRecord() {
+    public List<AttendanceDto> getAttendanceRecord() {
         return attendanceService.getAttendanceRecord();
     }
 
     @PostMapping("/addattendance")
-    public String addAttendanceRecord(@RequestBody AttendanceInfo attendanceInfo) {
-        attendanceService.postAttendanceRecord(attendanceInfo);
+    public String addAttendanceRecord(@RequestBody AttendanceDto attendanceDto) {
+        attendanceService.postAttendanceRecord(attendanceDto);
         return "Attendance record added successfully";
     }
+
 }

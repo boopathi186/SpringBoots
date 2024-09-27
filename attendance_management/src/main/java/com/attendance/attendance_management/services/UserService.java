@@ -1,40 +1,67 @@
 package com.attendance.attendance_management.services;
 
+
+import com.attendance.attendance_management.dto.UserDto;
+import com.attendance.attendance_management.mapper.UserMapper;
 import com.attendance.attendance_management.repository.UserRepository;
 import com.attendance.attendance_management.table.UserDetails;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-//import com.attendance.attendance_management.Table.UserDetails;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+    private final List<UserDto> userDtoList = new ArrayList<>();
 
-    public List<UserDetails> getUser() {
-        return userRepository.findAll();
+    public List<UserDto> getUser() {
+        userDtoList.clear();
+        final List<UserDetails> userDetails = userRepository.findAll();
+        userDetails.forEach(user -> {
+            UserDto userDto = new UserDto();
+            userDto.setDepartment(user.getDepartment());
+            userDto.setRoll(user.getRoll());
+            userDto.setName(user.getName());
+            userDto.setUserId(user.getUserId());
+            userDtoList.add(userDto);
+        });
+        return userDtoList;
     }
 
-    public UserDetails getUserById(Long id) {
-        return userRepository.getReferenceById(Math.toIntExact(id));
+    public UserDto getUserById(long id) {
+        if (userDtoList.isEmpty()) {
+            getUser();
+        }
+        return userDtoList.stream().filter(user -> user.getUserId().equals(id)).findFirst()
+                .orElse(null);
     }
 
-    public List<UserDetails> getUserByRoll(String roll) {
-        return userRepository.findAll().stream().filter(r -> r.getRoll().equals(roll)).collect(Collectors.toList());
+    public UserDto getUserByRoll(String roll) {
+        if (userDtoList.isEmpty()) {
+            getUser();
+        }
+        return userDtoList.stream().filter(user -> user.getRoll().equals(roll)).findFirst()
+                .orElse(null);
     }
 
-    public List<UserDetails> getUserByDepartment(String department) {
-        return userRepository.findAll().stream().filter(r -> r.getDepartment().equals(department)).collect(Collectors.toList());
+    public UserDto getUserByDepartment(String department) {
+        if (userDtoList.isEmpty()) {
+            getUser();
+        }
+        return userDtoList.stream().filter(user -> user.getDepartment().equals(department)).findFirst()
+                .orElse(null);
     }
 
-    public void getDelete(int id) {
-        userRepository.deleteById(id);
+    public void getDelete(long id) {
+        userDtoList.removeIf(user -> user.getUserId().equals(id));
     }
 }
+
+
+
+
