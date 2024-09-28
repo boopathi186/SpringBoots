@@ -1,6 +1,6 @@
 package com.attendance.attendance_management.dto;
 
-import com.attendance.attendance_management.table.UserDetails;
+import com.attendance.attendance_management.table.UserInfo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +10,7 @@ public class AttendanceDto {
     private Long attendance_id;
     private String date;
     private String RecordIn;
-    private UserDetails user;
+    private UserInfo user;
     private String RecordOut;
     private String Status;
 

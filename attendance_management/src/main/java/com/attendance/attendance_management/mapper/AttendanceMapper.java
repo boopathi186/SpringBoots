@@ -3,7 +3,6 @@ package com.attendance.attendance_management.mapper;
 import com.attendance.attendance_management.dto.AttendanceDto;
 import com.attendance.attendance_management.repository.AttendanceRepository;
 import com.attendance.attendance_management.table.AttendanceInfo;
-import com.attendance.attendance_management.table.UserDetails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,33 +16,35 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class AttendanceMapper {
-   private final AttendanceRepository attendanceRepo;
-   private List<AttendanceDto> dtoList = new ArrayList<>();
+    private final AttendanceRepository attendanceRepo;
+    private List<AttendanceDto> dtoList = new ArrayList<>();
 
-   public  void toDto()
-   {
-       for (AttendanceInfo att : attendanceRepo.findAll())
-       {
-           if(att.getStatus() != null)
-           {
-               dtoList.add(new AttendanceDto(att.getAttendance_id(),
-                       att.getDate(),att.getStatus(),att.getRecordIn(),att.getRecordOut(),att.getUser()));
-           }
-       }
-   }
+    public void toDto() {
+        dtoList.clear();
+        for (AttendanceInfo att : attendanceRepo.findAll()) {
+            if (att.getStatus() != null) {
+                AttendanceDto attendanceDto = new AttendanceDto();
+                attendanceDto.setAttendance_id(att.getAttendance_id());
+                attendanceDto.setRecordIn(att.getRecordIn());
+                attendanceDto.setRecordOut(att.getRecordOut());
+                attendanceDto.setStatus(att.getStatus());
+                attendanceDto.setDate(att.getDate());
+                attendanceDto.setUser(att.getUser());
+                dtoList.add(attendanceDto);
+            }
+        }
+    }
 
-   public  void toEntity(AttendanceDto attendanceDto)
-   {
-       AttendanceInfo attendanceDetails = new AttendanceInfo();
-       attendanceDetails.setAttendance_id(attendanceDto.getAttendance_id());
-       attendanceDetails.setDate(attendanceDto.getDate());
-       attendanceDetails.setStatus(attendanceDto.getStatus());
-       attendanceDetails.setRecordIn(attendanceDto.getRecordIn());
-       attendanceDetails.setRecordOut(attendanceDto.getRecordOut());
-       UserDetails userDetails = new UserDetails();
-       userDetails.setUserId(attendanceDto.getUser().getUserId());
-       attendanceRepo.save(attendanceDetails);
-   }
+    public AttendanceInfo toEntity(AttendanceDto attendanceDto) {
+        AttendanceInfo attendanceDetails = new AttendanceInfo();
+        attendanceDetails.setAttendance_id(attendanceDto.getAttendance_id());
+        attendanceDetails.setDate(attendanceDto.getDate());
+        attendanceDetails.setStatus(attendanceDto.getStatus());
+        attendanceDetails.setRecordIn(attendanceDto.getRecordIn());
+        attendanceDetails.setRecordOut(attendanceDto.getRecordOut());
+        attendanceRepo.save(attendanceDetails);
+        return attendanceDetails;
+    }
 
 }
 

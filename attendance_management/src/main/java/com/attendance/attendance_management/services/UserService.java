@@ -2,9 +2,8 @@ package com.attendance.attendance_management.services;
 
 
 import com.attendance.attendance_management.dto.UserDto;
-import com.attendance.attendance_management.mapper.UserMapper;
 import com.attendance.attendance_management.repository.UserRepository;
-import com.attendance.attendance_management.table.UserDetails;
+import com.attendance.attendance_management.table.UserInfo;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class UserService {
 
     public List<UserDto> getUser() {
         userDtoList.clear();
-        final List<UserDetails> userDetails = userRepository.findAll();
+        final List<UserInfo> userDetails = userRepository.findAll();
         userDetails.forEach(user -> {
             UserDto userDto = new UserDto();
             userDto.setDepartment(user.getDepartment());

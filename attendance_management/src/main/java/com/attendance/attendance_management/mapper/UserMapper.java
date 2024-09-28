@@ -2,7 +2,7 @@ package com.attendance.attendance_management.mapper;
 
 import com.attendance.attendance_management.dto.UserDto;
 import com.attendance.attendance_management.repository.UserRepository;
-import com.attendance.attendance_management.table.UserDetails;
+import com.attendance.attendance_management.table.UserInfo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -16,23 +16,19 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class UserMapper {
-    private  final UserRepository userRepository;
+    private final UserRepository userRepository;
     private List<UserDto> userDto = new ArrayList<>();
 
-    public void toDto()
-    {
-   for (UserDetails userDetails: userRepository.findAll())
-   {
-       if(userDetails.getUserId() != null)
-       {
-           userDto.add(new UserDto(userDetails.getDepartment(),userDetails.getName(), userDetails.getRoll(), userDetails.getUserId()));
-       }
-   }
+    public void toDto() {
+        for (UserInfo userDetails : userRepository.findAll()) {
+            if (userDetails.getUserId() != null) {
+                userDto.add(new UserDto());
+            }
+        }
     }
 
-    public UserDetails toEntity(UserDto userDtoEntity)
-    {
-        UserDetails userInfo = new UserDetails();
+    public UserInfo toEntity(UserDto userDtoEntity) {
+        UserInfo userInfo = new UserInfo();
         userInfo.setUserId(userDtoEntity.getUserId());
         userInfo.setName(userDtoEntity.getName());
         userInfo.setDepartment(userDtoEntity.getDepartment());

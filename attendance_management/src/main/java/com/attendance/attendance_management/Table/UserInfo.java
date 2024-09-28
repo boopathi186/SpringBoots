@@ -1,6 +1,5 @@
 package com.attendance.attendance_management.table;
 
-import com.attendance.attendance_management.repository.UserRepository;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "user_info")
-public class UserDetails {
+public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")

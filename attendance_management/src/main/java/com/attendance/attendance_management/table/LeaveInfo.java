@@ -15,9 +15,9 @@ public class LeaveInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long leave_id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private UserDetails user;
+    private UserInfo user;
     @Column(name = "leave_date")
     private String leaveDate;
 

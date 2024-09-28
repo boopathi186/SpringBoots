@@ -30,10 +30,8 @@ public class LeaveController {
         return leaveService.getRecordByDate(date);
     }
 
-
     public void addLeaveForm(LeaveInfo data) {
         leaveService.addLeaveForm(data);
-
     }
 
     @DeleteMapping("/id/{id}")
