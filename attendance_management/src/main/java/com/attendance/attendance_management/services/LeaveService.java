@@ -1,11 +1,11 @@
 package com.attendance.attendance_management.services;
 
 import com.attendance.attendance_management.dto.LeaveDto;
+import com.attendance.attendance_management.dto.UserDto;
 import com.attendance.attendance_management.mapper.LeaveMapper;
 import com.attendance.attendance_management.repository.LeaveRepository;
 import com.attendance.attendance_management.table.LeaveInfo;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,35 +19,37 @@ public class LeaveService {
     private final LeaveMapper leaveMapper;
 
     public List<LeaveDto> getLeaveData() {
-        List<LeaveDto> leaveDtoList = new ArrayList<>();
-        final List<LeaveInfo> leaveInfoList = leaveRepository.findAll();
+        final List<LeaveDto> leaveDtoList = new ArrayList<>();
+        final List<LeaveInfo> leaveInfoList = this.leaveRepository.findAll();
         leaveInfoList.forEach(leaveInfo -> {
-            LeaveDto leaveDto = leaveMapper.toDto(leaveInfo);
+            final LeaveDto leaveDto = this.leaveMapper.setDto(leaveInfo);
             leaveDtoList.add(leaveDto);
         });
         return leaveDtoList;
     }
 
-    public LeaveDto getRecordById(int id) {
-        LeaveInfo leaveInfo = leaveRepository.findById(id).orElse(null);
-        return leaveMapper.toDto(leaveInfo);
+    public LeaveDto getRecordById(final int id) {
+        final List<LeaveDto> leaveDtoList = getLeaveData();
+       return leaveDtoList.stream()
+                .filter(user -> user.getLeave_id()==(id)).findFirst().orElse(null);
     }
 
-    public List<LeaveDto> getRecordByDate(String date) {
-        List<LeaveInfo> leaveInfoList = leaveRepository.findByLeaveDate(date);
-        return leaveMapper.toDtoList(leaveInfoList);
+    public List<LeaveDto> getRecordByDate(final String date) {
+        final List<LeaveDto> leaveDtoList = getLeaveData();
+        return leaveDtoList.stream()
+                .filter(user -> user.getLeaveDate().equals(date)).toList();
     }
 
-    public void addLeaveForm(LeaveInfo leaveInfo) {
-        leaveRepository.save(leaveInfo);
+    public void addLeaveForm(final LeaveInfo leaveInfo) {
+        this.leaveRepository.save(leaveInfo);
     }
 
-    public void getDelete(int id) {
-        leaveRepository.deleteById(id);
+    public void getDelete(final int id) {
+        this.leaveRepository.deleteById(id);
     }
 
 
-    public void addAbsentForm(LeaveInfo leaveInfo) {
-        leaveRepository.save(leaveInfo);
+    public void addAbsentForm(final LeaveInfo leaveInfo) {
+        this.leaveRepository.save(leaveInfo);
     }
 }

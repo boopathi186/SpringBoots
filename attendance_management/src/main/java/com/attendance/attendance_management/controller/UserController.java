@@ -23,16 +23,16 @@ public class UserController {
 
     @GetMapping("/id/{id}")
     public UserDto getUserById(@PathVariable String id) {
-        return (UserDto) userService.getUserById(Long.parseLong(id));
+        return  userService.getUserById(Long.parseLong(id));
     }
 
     @GetMapping("/roll/{roll}")
-    public UserDto getUserByRoll(@PathVariable String roll) {
+    public List<UserDto> getUserByRoll(@PathVariable String roll) {
         return userService.getUserByRoll(roll);
     }
 
     @GetMapping("/department/{department}")
-    public UserDto getUserByDepartment(@PathVariable String department) {
+    public List<UserDto> getUserByDepartment(@PathVariable String department) {
         return userService.getUserByDepartment(department);
     }
 

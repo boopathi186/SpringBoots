@@ -19,7 +19,7 @@ public class AttendanceMapper {
     private final AttendanceRepository attendanceRepo;
     private List<AttendanceDto> dtoList = new ArrayList<>();
 
-    public void toDto() {
+    public void setDto() {
         dtoList.clear();
         for (AttendanceInfo att : attendanceRepo.findAll()) {
             if (att.getStatus() != null) {
@@ -35,13 +35,14 @@ public class AttendanceMapper {
         }
     }
 
-    public AttendanceInfo toEntity(AttendanceDto attendanceDto) {
+    public AttendanceInfo setEntity(AttendanceDto attendanceDto) {
         AttendanceInfo attendanceDetails = new AttendanceInfo();
         attendanceDetails.setAttendance_id(attendanceDto.getAttendance_id());
         attendanceDetails.setDate(attendanceDto.getDate());
         attendanceDetails.setStatus(attendanceDto.getStatus());
         attendanceDetails.setRecordIn(attendanceDto.getRecordIn());
         attendanceDetails.setRecordOut(attendanceDto.getRecordOut());
+        attendanceDetails.setUser(attendanceDto.getUser());
         attendanceRepo.save(attendanceDetails);
         return attendanceDetails;
     }

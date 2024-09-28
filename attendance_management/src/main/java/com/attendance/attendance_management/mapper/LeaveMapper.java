@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LeaveMapper {
 
-    public LeaveDto toDto(LeaveInfo leaveInfo) {
+    public LeaveDto setDto(LeaveInfo leaveInfo) {
         LeaveDto leaveDto = new LeaveDto();
         leaveDto.setLeave_id(leaveInfo.getLeave_id());
         leaveDto.setLeaveDate(leaveInfo.getLeaveDate());
@@ -20,7 +20,7 @@ public class LeaveMapper {
         return leaveDto;
     }
 
-    public LeaveInfo toEntity(LeaveDto leaveDto) {
+    public LeaveInfo setEntity(LeaveDto leaveDto) {
         LeaveInfo leaveInfo = new LeaveInfo();
         leaveInfo.setLeaveDate(leaveDto.getLeaveDate());
         leaveInfo.setLeave_id(leaveDto.getLeave_id());
@@ -31,7 +31,7 @@ public class LeaveMapper {
     public List<LeaveDto> toDtoList(List<LeaveInfo> leaveInfoList) {
         List<LeaveDto> leaveDtoList = new ArrayList<>();
         for (LeaveInfo leaveInfo : leaveInfoList) {
-            leaveDtoList.add(toDto(leaveInfo));
+            leaveDtoList.add(setDto(leaveInfo));
         }
         return leaveDtoList;
     }
