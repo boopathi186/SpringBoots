@@ -1,7 +1,6 @@
 package com.attendance.attendance_management.services;
 
 import com.attendance.attendance_management.dto.LeaveDto;
-import com.attendance.attendance_management.dto.UserDto;
 import com.attendance.attendance_management.mapper.LeaveMapper;
 import com.attendance.attendance_management.repository.LeaveRepository;
 import com.attendance.attendance_management.table.LeaveInfo;
@@ -31,7 +30,7 @@ public class LeaveService {
     public LeaveDto getRecordById(final int id) {
         final List<LeaveDto> leaveDtoList = getLeaveData();
        return leaveDtoList.stream()
-                .filter(user -> user.getLeave_id()==(id)).findFirst().orElse(null);
+                .filter(user -> user.getLeaveId()==(id)).findFirst().orElse(null);
     }
 
     public List<LeaveDto> getRecordByDate(final String date) {
@@ -44,7 +43,7 @@ public class LeaveService {
         this.leaveRepository.save(leaveInfo);
     }
 
-    public void getDelete(final int id) {
+    public void getDelete(final Long id) {
         this.leaveRepository.deleteById(id);
     }
 

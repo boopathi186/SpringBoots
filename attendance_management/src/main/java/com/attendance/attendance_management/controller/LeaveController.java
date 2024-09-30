@@ -35,8 +35,8 @@ public class LeaveController {
     }
 
     @DeleteMapping("/id/{id}")
-    public String getDelete(@PathVariable String id) {
-        leaveService.getDelete(Integer.parseInt(id));
+    public String getDelete(@PathVariable Long id) {
+        leaveService.getDelete(id);
         return "Deleted";
     }
 }

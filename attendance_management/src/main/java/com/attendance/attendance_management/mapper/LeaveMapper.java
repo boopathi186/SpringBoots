@@ -5,34 +5,15 @@ import com.attendance.attendance_management.table.LeaveInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class LeaveMapper {
 
     public LeaveDto setDto(LeaveInfo leaveInfo) {
         LeaveDto leaveDto = new LeaveDto();
-        leaveDto.setLeave_id(leaveInfo.getLeave_id());
+        leaveDto.setLeaveId(leaveInfo.getLeaveId());
         leaveDto.setLeaveDate(leaveInfo.getLeaveDate());
         leaveDto.setUser(leaveInfo.getUser());
         return leaveDto;
-    }
-
-    public LeaveInfo setEntity(LeaveDto leaveDto) {
-        LeaveInfo leaveInfo = new LeaveInfo();
-        leaveInfo.setLeaveDate(leaveDto.getLeaveDate());
-        leaveInfo.setLeave_id(leaveDto.getLeave_id());
-        leaveInfo.setUser(leaveDto.getUser());
-        return leaveInfo;
-    }
-
-    public List<LeaveDto> toDtoList(List<LeaveInfo> leaveInfoList) {
-        List<LeaveDto> leaveDtoList = new ArrayList<>();
-        for (LeaveInfo leaveInfo : leaveInfoList) {
-            leaveDtoList.add(setDto(leaveInfo));
-        }
-        return leaveDtoList;
     }
 }

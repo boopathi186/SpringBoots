@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LeaveRepository extends JpaRepository<LeaveInfo,Integer> {
-    List<LeaveInfo> findByLeaveDate(String date);
+public interface LeaveRepository extends JpaRepository<LeaveInfo,Long> {
 }

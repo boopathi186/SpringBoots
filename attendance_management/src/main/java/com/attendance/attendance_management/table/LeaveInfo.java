@@ -5,22 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-@Component
+
 @Entity
 @Getter
 @Setter
-@Table(name = "attendance_info")
-public class AttendanceInfo {
+@Table(name = "leave_info")
+public class LeaveInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long attendanceId;
-    @ManyToOne(cascade = CascadeType.ALL)
+    private Long leaveId;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserInfo user;
-    private String date;
-    private String RecordIn;
-    private String RecordOut;
-    private String Status;
+    @Column(name = "leave_date")
+    private String leaveDate;
 
 }

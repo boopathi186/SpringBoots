@@ -2,7 +2,9 @@ package com.attendance.attendance_management.mapper;
 
 import com.attendance.attendance_management.dto.AttendanceDto;
 import com.attendance.attendance_management.repository.AttendanceRepository;
+import com.attendance.attendance_management.repository.UserRepository;
 import com.attendance.attendance_management.table.AttendanceInfo;
+import com.attendance.attendance_management.table.UserInfo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AttendanceMapper {
     private final AttendanceRepository attendanceRepo;
+    private final UserRepository userRepository;
     private List<AttendanceDto> dtoList = new ArrayList<>();
 
     public void setDto() {
@@ -24,7 +27,7 @@ public class AttendanceMapper {
         for (AttendanceInfo att : attendanceRepo.findAll()) {
             if (att.getStatus() != null) {
                 AttendanceDto attendanceDto = new AttendanceDto();
-                attendanceDto.setAttendance_id(att.getAttendance_id());
+                attendanceDto.setAttendanceId(att.getAttendanceId());
                 attendanceDto.setRecordIn(att.getRecordIn());
                 attendanceDto.setRecordOut(att.getRecordOut());
                 attendanceDto.setStatus(att.getStatus());
@@ -37,12 +40,13 @@ public class AttendanceMapper {
 
     public AttendanceInfo setEntity(AttendanceDto attendanceDto) {
         AttendanceInfo attendanceDetails = new AttendanceInfo();
-        attendanceDetails.setAttendance_id(attendanceDto.getAttendance_id());
+        attendanceDetails.setAttendanceId(attendanceDto.getAttendanceId());
         attendanceDetails.setDate(attendanceDto.getDate());
         attendanceDetails.setStatus(attendanceDto.getStatus());
         attendanceDetails.setRecordIn(attendanceDto.getRecordIn());
         attendanceDetails.setRecordOut(attendanceDto.getRecordOut());
-        attendanceDetails.setUser(attendanceDto.getUser());
+        UserInfo userInfo = userRepository.findById(attendanceDto.getUser().getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
+        attendanceDetails.setUser(userInfo);
         attendanceRepo.save(attendanceDetails);
         return attendanceDetails;
     }

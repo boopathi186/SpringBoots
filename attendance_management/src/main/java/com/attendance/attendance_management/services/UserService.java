@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
-
 
     public List<UserDto> getUser() {
         final List<UserDto> userDtoList = new ArrayList<>();
@@ -60,6 +58,6 @@ public class UserService {
 
     public void getDelete(final long id) {
 
-        this.userRepository.deleteById((int) id);
+        this.userRepository.deleteById(id);
     }
 }

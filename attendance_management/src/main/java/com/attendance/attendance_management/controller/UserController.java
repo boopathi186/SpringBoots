@@ -14,7 +14,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @GetMapping
     public List<UserDto> getUser() {
@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/id/{id}")
     public UserDto getUserById(@PathVariable String id) {
-        return  userService.getUserById(Long.parseLong(id));
+        return userService.getUserById(Long.parseLong(id));
     }
 
     @GetMapping("/roll/{roll}")

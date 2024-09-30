@@ -2,7 +2,6 @@ package com.attendance.attendance_management.controller;
 
 import com.attendance.attendance_management.dto.AttendanceDto;
 import com.attendance.attendance_management.services.AttendanceService;
-import com.attendance.attendance_management.table.AttendanceInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

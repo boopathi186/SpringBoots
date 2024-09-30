@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AttendanceDto {
-    private Long attendance_id;
+    private Long attendanceId;
     private String date;
     private String RecordIn;
     private UserInfo user;
